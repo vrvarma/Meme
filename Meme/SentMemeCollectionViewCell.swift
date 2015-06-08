@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SentMemeCollectionViewCell.swift
 //  Meme
 //
 //  Created by Vikas Varma on 6/3/15.
