@@ -20,15 +20,7 @@ class MemeTableViewController: UIViewController, UITableViewDataSource {
     }
     
     override func viewDidAppear(animated: Bool) {
-        //if the global meme list is empty
-        //Then instantiate memeEditor.
-        if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count == 0 {
-            
-            //Pop up the editor
-            let controller =
-            self.storyboard!.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
-            self.navigationController!.presentViewController(controller, animated: true, completion: nil)
-        }
+        
         //Reload meme data
         memeTableView.reloadData()
     }
@@ -43,10 +35,10 @@ class MemeTableViewController: UIViewController, UITableViewDataSource {
         //Show the selected meme in a Detail View
         let memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
         let meme = memes[indexPath.row]
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         controller.index = indexPath.row
     
-        self.navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     
@@ -80,9 +72,9 @@ class MemeTableViewController: UIViewController, UITableViewDataSource {
     @IBAction func addMeme(sender: UIBarButtonItem) {
         
         let controller =
-        self.storyboard!.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
+        storyboard!.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
         
-        self.navigationController!.presentViewController(controller, animated: true, completion: nil)
+        navigationController!.presentViewController(controller, animated: true, completion: nil)
     }
     
     @IBAction func setEditMode(sender: UIBarButtonItem) {

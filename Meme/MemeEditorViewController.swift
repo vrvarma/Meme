@@ -93,7 +93,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
         // Subscribe to keyboard notifications to allow the view to raise when necessary
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
         
     }
     
@@ -102,7 +102,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
         super.viewWillDisappear(animated)
         
         //unsubscribe from keyboard notifications
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     //action method to pick an image from the album
@@ -111,7 +111,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     //action method to pick an image from the camera
@@ -121,7 +121,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     //image picker controller methods.
@@ -131,7 +131,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
             if let image = info[UIImagePickerControllerOriginalImage]  as?  UIImage {
                 
                 imageView.image = image
-                self.dismissViewControllerAnimated(true, completion: nil)
+                dismissViewControllerAnimated(true, completion: nil)
             }
     }
     
@@ -161,7 +161,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
         
         if bottomTextField.isFirstResponder() {
             
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
@@ -170,7 +170,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
         
         if bottomTextField.isFirstResponder() {
             
-            self.view.frame.origin.y = 0
+            view.frame.origin.y = 0
         }
     }
     
@@ -186,7 +186,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
     //Stop editing and return.
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-        self.view.endEditing(true)
+        view.endEditing(true)
         return true
     }
     
@@ -206,7 +206,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
             
             appDelegate.memes.append(meme)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
         //println("Number of memes saved: \(appDelegate.memes.count)")
         
     }
@@ -227,14 +227,14 @@ UINavigationControllerDelegate,UITextFieldDelegate {
             }
         }
         //pop up the activity window.
-        self.presentViewController(activityController, animated: true, completion: nil)
+        presentViewController(activityController, animated: true, completion: nil)
         
     }
     
     //User cancelled the editor
     @IBAction func cancelEditor(sender: UIBarButtonItem) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -244,22 +244,22 @@ UINavigationControllerDelegate,UITextFieldDelegate {
         var memedImage: UIImage?
         
         //Hide the tool and nav bar
-        self.topToolBar.hidden = true
-        self.bottomToolBar.hidden = true
-        self.navigationController?.setToolbarHidden(true, animated: false)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        topToolBar.hidden = true
+        bottomToolBar.hidden = true
+        navigationController?.setToolbarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         //Render the view to a single image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         memedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         //Show tool and nav bar
-        self.topToolBar.hidden = false
-        self.bottomToolBar.hidden = false
-        self.navigationController?.setToolbarHidden(false, animated: false)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        topToolBar.hidden = false
+        bottomToolBar.hidden = false
+        navigationController?.setToolbarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         
         return memedImage!
     }

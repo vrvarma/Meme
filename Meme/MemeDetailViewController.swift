@@ -33,10 +33,10 @@ class MemeDetailViewController: UIViewController {
     @IBAction func editMeme(sender: UIButton) {
         
        let controller =
-        self.storyboard!.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
+        storyboard!.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
         controller.savedMeme = meme
         controller.indexRow = index
-        self.navigationController!.presentViewController(controller, animated: true,completion:{
+        navigationController!.presentViewController(controller, animated: true,completion:{
             
             //Once the editing is complete
             //refresh the detailView window with the latest meme image.
@@ -50,7 +50,7 @@ class MemeDetailViewController: UIViewController {
     @IBAction func deleteMeme(sender: AnyObject) {
         
         var confirm = buildAlertDialog(index!)
-        self.navigationController!.presentViewController(confirm, animated: true,completion:nil)
+        navigationController!.presentViewController(confirm, animated: true,completion:nil)
     }
     
     //Add the dialog to confirm deletion

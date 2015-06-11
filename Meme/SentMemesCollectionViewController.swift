@@ -23,14 +23,7 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
     }
     
     override func viewDidAppear(animated: Bool) {
-        //if the global meme list is empty
-        //Then instantiate memeEditor.
-        if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count == 0 {
-            
-            //Pop up the meme editor
-            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
-            self.navigationController?.presentViewController(controller, animated: true, completion: nil)
-        }
+        
         //Reload meme data
         memeCollectionView.reloadData()
     }
@@ -58,13 +51,13 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
         let meme = memes[indexPath.row]
         
         //if we are not editing the items then show the detail view
-        if !self.editing{
+        if !editing{
             
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+            let controller = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
             
             controller.index = indexPath.row
             
-            self.navigationController?.pushViewController(controller, animated: true)
+            navigationController?.pushViewController(controller, animated: true)
         }
         else{
             
@@ -72,7 +65,7 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
             //We're editing so show a confirmation dialog
             //and delete this meme if confirmed action is delete
             var confirm = buildAlertDialog(indexPath)
-            self.presentViewController(confirm, animated: true, completion: nil)
+            presentViewController(confirm, animated: true, completion: nil)
         }
     }
     
@@ -97,8 +90,8 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
     //Add a new meme from the action button
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
         
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
-        self.navigationController!.presentViewController(controller, animated: true, completion: nil)
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("memeEditor") as! MemeEditorViewController
+        navigationController!.presentViewController(controller, animated: true, completion: nil)
     }
     
     //action method to put the collection in edit mode
@@ -107,17 +100,17 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
         
         //The View is in edit mode.
         //Set it back to non edit mode
-        if self.editing{
+        if editing{
             
             sender.style = UIBarButtonItemStyle.Plain
             sender.title = "Edit"
-            self.editing = false
+            editing = false
         }
         else{
             //else Set the view to edit mode
             sender.title = "Done"
             sender.style = UIBarButtonItemStyle.Done
-            self.editing = true
+            editing = true
         }
     }
 }
