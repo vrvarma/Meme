@@ -126,7 +126,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
     
     //image picker controller methods.
     func imagePickerController(picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
+        didFinishPickingMediaWithInfo info: [String : AnyObject]){
             
             if let image = info[UIImagePickerControllerOriginalImage]  as?  UIImage {
                 
@@ -192,11 +192,11 @@ UINavigationControllerDelegate,UITextFieldDelegate {
     
     func saveMeme(memedImage: UIImage!) {
         
-        var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: imageView.image, memedImage: memedImage)
+        let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: imageView.image, memedImage: memedImage)
         //Get the AppDelegate instance
-        var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        if let pem = savedMeme {
+        if let _ = savedMeme {
             
             //println ("updating index   \(indexRow)")
             //replace the already saved meme with the new one.

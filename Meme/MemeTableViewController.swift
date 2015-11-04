@@ -34,7 +34,7 @@ class MemeTableViewController: UIViewController, UITableViewDataSource {
         
         //Show the selected meme in a Detail View
         let memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
-        let meme = memes[indexPath.row]
+        _ = memes[indexPath.row]
         let controller = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         controller.index = indexPath.row
     

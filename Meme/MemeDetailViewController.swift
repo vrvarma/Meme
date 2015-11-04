@@ -40,7 +40,7 @@ class MemeDetailViewController: UIViewController {
             
             //Once the editing is complete
             //refresh the detailView window with the latest meme image.
-            var meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes[self.index!]
+            let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes[self.index!]
             self.memeDetailView.image = meme.memedImage
         })
         
@@ -49,14 +49,14 @@ class MemeDetailViewController: UIViewController {
     
     @IBAction func deleteMeme(sender: AnyObject) {
         
-        var confirm = buildAlertDialog(index!)
+        let confirm = buildAlertDialog(index!)
         navigationController!.presentViewController(confirm, animated: true,completion:nil)
     }
     
     //Add the dialog to confirm deletion
     func buildAlertDialog(index: Int) -> UIAlertController{
         
-        var confirm = UIAlertController(title: "Delete Meme?", message: "Do you really want to delete?", preferredStyle: UIAlertControllerStyle.Alert)
+        let confirm = UIAlertController(title: "Delete Meme?", message: "Do you really want to delete?", preferredStyle: UIAlertControllerStyle.Alert)
         
         //No button just closes the dialog
         confirm.addAction(UIAlertAction(title: "No",style: UIAlertActionStyle.Cancel, handler: nil))

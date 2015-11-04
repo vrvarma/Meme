@@ -48,7 +48,7 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath){
         
         let memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
-        let meme = memes[indexPath.row]
+        _ = memes[indexPath.row]
         
         //if we are not editing the items then show the detail view
         if !editing{
@@ -64,7 +64,7 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
             //Create the alert dialog
             //We're editing so show a confirmation dialog
             //and delete this meme if confirmed action is delete
-            var confirm = buildAlertDialog(indexPath)
+            let confirm = buildAlertDialog(indexPath)
             presentViewController(confirm, animated: true, completion: nil)
         }
     }
@@ -72,7 +72,7 @@ class SentMemesCollectionViewController : UIViewController, UICollectionViewData
     //Add a dialog to confirm
     func buildAlertDialog(indexPath:NSIndexPath) -> UIAlertController{
         
-        var confirm = UIAlertController(title: "Delete Meme?", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let confirm = UIAlertController(title: "Delete Meme?", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         
         //Cancel button just closes the dialog
         confirm.addAction(UIAlertAction(title: "Cancel",style: UIAlertActionStyle.Cancel, handler: nil))
